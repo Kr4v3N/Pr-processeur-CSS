@@ -1,0 +1,138 @@
+/***** VARIABLES *****/
+
+$orange: #FF5722;
+$yellow: #ffc700;
+$white: #fff;
+$black: #3c3c3c;
+$darkGrey: #37474F;
+
+
+/***** MIXINS *****/
+
+@mixin ring($color, $size) {
+  width: $size;
+  height: $size;
+
+  border: $size*0.05 $color solid;
+  border-radius: $size / 2;
+
+  $shadow: $size * 0.02;
+  box-shadow: inset $shadow $shadow $shadow $shadow darken($color, 5%),
+  $shadow $shadow $shadow $shadow darken($color, 5%);
+}
+
+@mixin blackRing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/****** GENERAL ******/
+
+@font-face {
+    font-family: "Aniron";
+    src: url(../fonts/aniron_regular.ttf);
+}
+
+@font-face {
+    font-family: "Party";
+    src: url(../fonts/party_business.ttf);
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 60px;
+}
+
+h1 {
+    font-family: "Aniron";
+    font-size: 50px
+}
+
+main {
+    background-image: url(../img/bg_light.png);
+}
+
+section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+
+/****** NAVBAR ******/
+
+.navbar {
+    background-color: $orange;
+    border: 0;
+    padding-bottom: 10px;
+}
+
+.navbar-default .navbar-brand {
+     color: $white;
+}
+
+.navbar-brand {
+    color: $white;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: $white;
+    font-family: "Aniron";
+    max-width: 180px;
+
+	&:hover {
+		border-bottom: 4px solid $white;
+	}
+}
+
+
+/****** MAIN ******/
+
+main section .row {
+	margin-bottom: 30px;
+}
+
+.orange-ring {
+	@include ring($orange, 50px);
+	margin-top: 10px;
+}
+
+.yellow-ring {
+	@include ring($yellow, 190px);
+	margin-top: 50px;
+}
+
+.black-ring {
+	@include blackRing;
+}
+.one-ring {
+  margin-top: 150px;
+  margin-right: 20%;
+}
+
+/**** LOOP & NESTING ****/
+
+@for $i from 1 through 6 {
+	$size: 50px * $i * 0.4;
+    .black-ring-#{$i} {
+		position: relative;
+		left: -($size*($i - 0.5))/7;
+        @include ring($darkGrey, $size);
+    }
+}
+
+/****** FOOTER ******/
+
+footer {
+    background-color: $orange;
+    font-family: "Aniron";
+    font-size: 15px;
+    padding: 30px;
+
+	& a {
+		color: $white;
+	}
+}
